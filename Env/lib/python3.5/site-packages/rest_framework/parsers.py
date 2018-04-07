@@ -11,11 +11,10 @@ import codecs
 from django.conf import settings
 from django.core.files.uploadhandler import StopFutureHandlers
 from django.http import QueryDict
+from django.http.multipartparser import ChunkIter
 from django.http.multipartparser import \
     MultiPartParser as DjangoMultiPartParser
-from django.http.multipartparser import (
-    ChunkIter, MultiPartParserError, parse_header
-)
+from django.http.multipartparser import MultiPartParserError, parse_header
 from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.six.moves.urllib import parse as urlparse
@@ -217,7 +216,7 @@ class FileUploadParser(BaseParser):
     def get_encoded_filename(self, filename_parm):
         """
         Handle encoded filenames per RFC6266. See also:
-        http://tools.ietf.org/html/rfc2231#section-4
+        https://tools.ietf.org/html/rfc2231#section-4
         """
         encoded_filename = force_text(filename_parm['filename*'])
         try:
